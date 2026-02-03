@@ -1,2 +1,2 @@
 server_ips: ['your.server.ip.address']
-prometheus_metrics_path: '/var/lib/prometheus/node-exporter'
+prometheus_metrics_path: '/var/lib/prometheus/node-exporter/room_metrics.prom'

@@ -20,10 +20,7 @@ if __name__ == "__main__":
             values = response.json()
 
             room_name = values['label']
-            save_dir = os.path.join(config['prometheus_metrics_path'], room_name)
-            if not os.path.exists(save_dir):
-                os.makedirs(save_dir)
-            save_path = os.path.join(save_dir, 'metrics.prom')
+            save_path = config['prometheus_metrics_path']
 
             # set temp and hum metrics
             temp = values['temp']
@@ -39,11 +36,12 @@ if __name__ == "__main__":
                 press = values['press']
                 press_gauge = prometheus_client.Gauge(f'{room_name}_press', 'Gauge')
                 press_gauge.set(press)
-
-            prometheus_client.write_to_textfile(save_path, prometheus_client.REGISTRY)
         except requests.exceptions.RequestException as e:
             if response is not None:
                 print(f"Error connecting to {url}: Status code {response.status_code}")
             else:
                 print(f"Error connecting to {url}: {e}")
             continue
+
+    # Write metrics to file
+    prometheus_client.write_to_textfile(save_path, prometheus_client.REGISTRY)
