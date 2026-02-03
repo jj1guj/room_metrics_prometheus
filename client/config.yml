@@ -1,0 +1,2 @@
+server_ips: ['your.server.ip.address']
+prometheus_metrics_path: '/var/lib/prometheus/node-exporter'
