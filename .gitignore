@@ -208,3 +208,4 @@ __marimo__/
 
 *.yaml
 *.yml
+server/aht21b_server/config.h
